@@ -1,0 +1,222 @@
+{% extends "templates/basepage.html" %}
+{% block js %}
+
+<script type="text/javascript" language="javascript">
+
+function doCheking(obj,number){
+	var table = document.getElementById("contentList");
+	var trObj = getRowObj(obj); 
+	var trNo = getRowNo(obj);
+	var trArr = getAllRowNo(obj);
+	var currentValue = table.rows[trNo-1].cells[1].innerHTML;
+	if (number==1){
+		if((trNo-1)==1){
+			var textValue='';
+		}else{
+			var textValue = table.rows[trNo-2].cells[1].innerHTML;
+		}
+	}
+	if (number==2){
+		if ((trNo-1)==0){
+			textValue = '';
+			if(trArr==trNo){
+				var currentValue = '';
+			}else{
+				var currentValue = table.rows[trNo].cells[1].innerHTML;
+			}
+		}
+		else{
+			var textValue = currentValue;
+			if (trArr==trNo){
+				currentValue = '';
+			}else{
+				currentValue=table.rows[trNo].cells[1].innerHTML;
+			}
+		}
+	}
+	//alert(textValue);
+	//alert(currentValue);
+	document.getElementById("hidden1").value = textValue;
+	document.getElementById("hidden2").value = currentValue;
+}
+
+function getRowNo(obj){
+   	var trObj = getRowObj(obj); 
+   	var trArr = trObj.parentNode.children;
+ 	for(var trNo= 0; trNo < trArr.length; trNo++){
+  		if(trObj == trObj.parentNode.children[trNo]){
+    		return (trNo+1);
+  		}
+ 	}
+}
+
+function getAllRowNo(obj){
+	var trObj = getRowObj(obj); 
+   	var trArr = trObj.parentNode.children;
+	return trArr.length;
+}
+
+function getRowObj(obj)
+{
+   var i = 0;
+   while(obj.tagName.toLowerCase() != "tr"){
+    obj = obj.parentNode;
+    if(obj.tagName.toLowerCase() == "table")
+  		return null;
+   }
+   return obj;
+}
+
+function getDateTimeStamp(dateStr){
+ 	return Date.parse(dateStr.replace(/-/gi,"/"));
+}
+
+function aaa()
+{
+	var table = document.getElementById("contentList");
+	var trNo = table.rows.length;
+	for (i=1;i<table.rows.length;i++){
+        if(table.rows[i].cells.length<4){
+            return;
+        }
+		var str = table.rows[i].cells[3].innerHTML;
+		var cd=str.length;
+		if(cd>12){
+			table.rows[i].cells[3].innerHTML=str.substring(0,12)+"...";
+		}
+	}
+}
+
+</script>
+<!--xieyingan加的代码-->
+<script language="javascript">
+///通过单击行反选该行所有CheckBox
+function SelectTR(tr)
+{
+  var tds=tr.childNodes;
+  for(var j=0; j<tds.length;j++)
+  {
+	var inputs=tds[j].childNodes;
+	for (var i=0; i < inputs.length; i++) // 遍历页面上所有的 input
+    {
+	  if (inputs[i].type == "radio")
+		{
+		  inputs[i].checked = !inputs[i].checked;
+		  //tr.style.backgroundColor = inputs[i].checked ? "#245EDC" : ""; //改变选中行的背景色
+	  }
+	}
+  }
+}
+function btnNext_click(){
+   var value="";
+   for (var i=0;i<box.length;i++ ){
+     if(box[i].checked){ //判断复选框是否选中
+    	value=value+box[i].value; //值的拼凑 .. 具体处理看你的需要,
+	 }
+   }
+   if(value==null||value==""){
+   	alert("请选择一条数据进行操作");
+   }else{
+   window.location.href="/contentList/0?father=" + value;
+   }
+}
+
+function btnCon_click(){
+    window.location.href="/contentAdd?father={{father}}&prev=&next=&prevValue=&page_id=0&isReply=True";
+}
+
+function btnExit_click(){
+ var box=document.getElementsByName('box');
+
+   var value="";
+   var mod="";
+   if(!box.length){
+   	if(box.checked){
+   		value=box.value; //值的拼凑 .. 具体处理看你的需要
+   }}else{
+       for (var i=0;i<box.length;i++ ){
+     if(box[i].checked){ //判断复选框是否选中
+    	value=value+box[i].value; //值的拼凑 .. 具体处理看你的需要,
+	 }
+   }
+   }
+   if(value==null||value==""){
+   	alert("请选择一条数据进行操作");
+   }else{
+   window.location.href="/saveRSS?id=" + value + "&mod=update";
+   }
+    }
+function btnDel_click(){
+ var box=document.getElementsByName('box');
+
+   var value="";
+   var mod="";
+   if(!box.length){
+   	if(box.checked){
+   		value=box.value; //值的拼凑 .. 具体处理看你的需要
+   }}else{
+       for (var i=0;i<box.length;i++ ){
+     if(box[i].checked){ //判断复选框是否选中
+    	value=value+box[i].value; //值的拼凑 .. 具体处理看你的需要,
+	 }
+   }
+   }
+
+   if(value==null||value==""){
+   	alert("请选择一条数据进行操作");
+   }else{
+   window.location.href="/saveRSS?id=" + value + "&mod=del";
+   }
+}
+</script>
+<script language="javascript"><!-- 改变单元格背景色 -->
+
+
+</script>
+<!--xieyingan加的代码END-->
+{% endblock %}
+{% block body %}
+<body onLoad="aaa();"  style="background:#ececec">
+{% endblock %}
+{% block navigator %}
+<a  href="#" >rss群管理</a>
+ >> <a href="/saveRSS">添加rss群</a> >> <a href="javascript:history.back(-1);">后退</a>
+{% endblock %}
+{% block content %}
+
+<form  method="get" action="/saveRSS">
+<table id="contentList"    border="0" cellpadding=1 cellspacing=1 bgcolor="#D5E3E6" >
+<tr bgcolor="#ffffff" height="25">
+	<td colspan="11" align="right">
+
+  <input type="submit" name="do" value="添加"  />
+  <input type="button" name="btnExit" value="编 辑" onclick="btnExit_click()"/>
+  <input type="button" name="btnDel" value="删 除" onclick="btnDel_click()"/>
+	</td>
+</tr>
+<tr bgcolor="#ffffff"  height="25">
+<td width="40px"  align="center">群号</td>
+		<td width="60px" align="center">群名称</td>
+		<td width="200px" align="center">rss地址</td>
+		<td width="200px" align="center">群标签</td>
+		<td width="40px" align="center">群类型</td>
+		<td width="40px" align="center">是否过滤图片</td>
+<td width="20px;">&nbsp;</td>
+</tr>
+{% for rss in rsslist%}
+<tr style="cursor:hand"  height="25" onClick="SelectTR(this);"  onmouseover="cells_color(this,1);" onMouseOut="cells_color(this,2);" bgcolor="#ffffff">
+<td align="center">{{rss.code}}</td>
+<td align="center"><a href="/saveRSS?id={{rss.key().id()}}">{{rss.groupname}}</a></td>
+<td>{{rss.rssUrl}}</td>
+<td>{{rss.tag}}</td>
+<td align="center">{{rss.type}}</td>
+<td align="center">{% if rss.isfilterImg %}不过滤{%else%}过滤{%endif%}</td>
+<td ><input  type="radio" name="box" value="{{rss.key().id()}}" >
+</td>
+</tr>
+
+{%endfor%}
+
+</table>
+</form>
+{% endblock %}

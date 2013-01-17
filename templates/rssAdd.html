@@ -1,0 +1,370 @@
+{% extends "templates/basepage.html" %}
+{% block navigator %}
+<a  href="#" >rss群管理</a>
+ >> <a href="#">添加rss群</a> >> <a href="javascript:history.back(-1);">后退</a>
+{% endblock %}
+{% block content %}
+<form action="/saveRSS" method="post">
+ <input type="hidden" name="id" value="{%if rss %}{{rss.key().id()}}{%endif%}"/>
+<table width="90%" cellpadding="1" cellspacing="1" border="0" bgcolor="#D5E3E6">
+  <tr  bgcolor="#ffffff">
+    <td style="padding-left:5px;" >群名称:</td>
+  </tr>
+  <tr  bgcolor="#ffffff">
+    <td>
+      <input type="text" name="groupname" value="{{rss.groupname}}" style="width:500px;"/>    </td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td style="padding-left:5px;" >rss地址:</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>
+	  <input type="text" name="rssUrl"  value="{{rss.rssUrl}}"  style="width:500px;"/>	</td>
+  </tr>
+
+  <tr bgcolor="#ffffff" >
+    <td style="padding-left:5px;" >群标签:</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>
+	  <input type="text" name="tag" value="{{rss.tag}}"  style="width:500px;"/>	</td>
+  </tr>
+    
+  <tr bgcolor="#ffffff" >
+    <td  style="padding-left:5px;" >群类型:</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>
+	  <input type="radio" name="type" {% if rss.type =='1'%} checked="checked"{%endif%} value="1">第一种群 <input type="radio" name="type" {% if rss.type =='2'%} checked="checked"{%endif%}  value="2">第二种群	</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td  style="padding-left:5px;" >是否过滤:</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>
+      <input type="radio" name="isfilterImg" {% if rss.isfilterImg %} {%else%} checked="checked"{%endif%} value="False">过滤 <input type="radio" name="isfilterImg" {% if rss.isfilterImg %} checked="checked"{%endif%}  value="True">不过滤	</td>
+  </tr>
+   <tr bgcolor="#ffffff" >
+    <td  style="padding-left:5px;" >头像：</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>
+
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head10.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head11.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head3.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head5.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head6.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="110"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="109"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="108"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="107"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="106"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="105"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="104"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="103"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="102"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head7.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head8.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/head9.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada3.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada5.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="101"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="100"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="99"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="98"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="97"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="96"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="95"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="94"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="93"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada6.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada7.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada8.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/heada9.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone10.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone3.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="92"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="91"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="90"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="89"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="88"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="87"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="86"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="85"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="84"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone5.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone6.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone7.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone8.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headone9.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree10.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="83"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="82"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="81"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="80"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="79"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="78"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="77"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="76"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="75"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree11.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree3.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree5.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree6.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree7.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree8.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headthree9.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="74"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="73"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="72"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="71"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="70"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="69"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="68"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="67"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="66"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo10.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo11.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo3.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo5.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo6.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="65"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="64"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="63"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="62"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="61"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="60"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="59"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="58"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="57"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo7.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo8.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/headtwo9.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai0.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai1.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai2.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai3.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai4.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai5.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="56"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="55"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="54"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="53"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="52"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="51"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="50"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="49"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="48"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/keai6.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l01.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l02.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l03.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l04.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l05.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l06.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l07.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l08.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="47"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="46"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="45"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="44"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="43"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="42"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="41"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="40"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="39"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l09.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l10.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l11.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l12.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l13.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l14.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l15.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l16.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l17.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="38"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="37"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="36"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="35"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="34"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="33"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="32"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="31"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="30"></td>
+                                                           </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l18.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l19.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l20.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l21.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l22.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l23.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l24.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l25.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l26.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="29"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="28"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="27"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="26"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="25"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="24"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="23"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="22"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="21"></td>
+                                                           </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l27.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l28.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l29.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l30.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l31.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l32.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l33.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l34.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l35.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="20"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="19"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="18"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="17"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="16"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="15"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="14"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="13"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="12"></td>
+                                                           </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l36.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l37.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l38.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l39.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l40.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l41.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l42.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l43.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l44.jpg" width="90px" height="90px"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="11"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="10"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="9"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="8"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="7"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="6"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="5"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="4"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="3"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l45.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/l46.jpg" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><img src="/static/images/moguico.png" width="90px" height="90px"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                </tr>
+                                <tr style="height: 25px;">
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="2"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="1"></td>
+                                    <td style="text-align: center;vertical-align:middle;"><input type="radio" name="GroupHead" value="0"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                    <td style="text-align: center;vertical-align:middle;"></td>
+                                </tr>
+                            </table>
+    </td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#ffffff" >
+    <td  align="left"  style="padding-left:25px;" >
+      <input type="submit" name="Submit" value="确定"/>
+	  <input type="reset" name="Reset" value="重置"/>
+	  <input type="button" name="Return" value="返回" onClick="javascript:history.back(-1);" />    </td>
+  </tr>
+</table>
+ <script type="text/javascript">
+                             {%if rss %}
+                                 var grouphead='{{ rss.head}}';
+                                 var ch=document.getElementsByName('GroupHead');
+                                 var chbox=null;
+                                 if(grouphead==null){
+                                     grouphead='0';
+                                 }
+                                 for(var m=0;m<ch.length;m++){
+                                     chbox=ch[m];
+                                     if(chbox.value==grouphead&&chbox.type=='radio'){
+                                         chbox.checked=true;
+                                     }
+                                 }
+                             {%endif%}
+                         </script>
+</form>
+{% endblock %}

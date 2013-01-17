@@ -1,0 +1,15 @@
+cron:
+
+- description: search Book
+  url: /RSS
+  schedule: every 20 minutes
+
+- description: sync rss
+  url: /syncRSS
+  schedule: every 5 minutes
+
+
+
+
+
+

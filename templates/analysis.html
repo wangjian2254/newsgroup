@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>新闻剥皮系统V0.1</title>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <style type="text/css">
+        tr{
+            height:25px;
+        }
+        *{
+        font-size:12px;
+        margin:0px;
+        padding:0px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table>
+        <tr>
+            <td colspan="2" align="center"><h1>（新闻信息采集）系统V0.1</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left"><a href="/">返回首页</a></td>
+        </tr>
+        <tr>
+            <td width="150px;">添加新的RSS资讯源</td>
+            <td><form action="/addRSS" method="post"><input type="text" name="rssUrl" style="width:200px;"><input type="submit" value="保存"></form></td>
+        </tr>
+        <tr>
+            <td>对现有功能评分</td>
+            <td><a href="/look">剥皮效果评分（新闻采集精准度）</a></td>
+        </tr>
+        <tr>
+            <td>查看剥皮效果统计</td>
+            <td><a href="/analysis">评分分析（新闻采集精准度）</a></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left"><h3>现在正在采集的RSS资讯源</h3></td>
+        </tr>
+        <tr>
+            <td>序号</td>
+            <td>RSS源</td>
+        </tr>
+        {% for rss in RSSs%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="/look?rss={{rss.key.id}}">{{rss.rssUrl}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<div style="float:right">{{rss.updateTime|date:"Y-m-d H:i:s"}}</div></td>
+        </tr>
+        <tr>
+            <td><a href="/detailLook?rss={{rss.key.id}}">查看具体情况</a></td>
+            <td height="70">
+                完全不准确：{{rss.r1}}<br>
+                不准确--需要改进：{{rss.r2}}<br>
+                可以忍受--图片不准确：{{rss.r3}}<br>
+                比较准确--可以接受了：{{rss.r4}}<br>
+                接近完美：{{rss.r5}}<br>
+                尚未评分：{{rss.r0}}<br>
+                尚未处理：{{rss.r6}}<br>
+            </td>
+        </tr>
+        {% endfor%}
+    </table>
+</center>
+</body>
+</html>

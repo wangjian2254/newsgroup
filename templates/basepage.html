@@ -1,0 +1,90 @@
+<html>
+<head>
+	<link href="/css/css.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/js/tool.js" >
+    </script>
+	{% block js %}{% endblock %}
+</head>
+{% block body %}
+<body style="background:#ececec">
+	{% endblock %}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td><img src="/image/contentframetopleft.png" alt="" height="23" width="16"></td>
+	<td background="/image/contentframetopbackground.png">
+	<img src="/image/spacer.gif" alt="" height="23" width="540"></td>
+	<td><img src="/image/contentframetopright.png" alt="" height="23" width="16"></td>
+</tr>
+  <tr>
+    <td width="16" style="background:url('/image/contentframeleftbackground.png') repeat-y;">
+	<img src="/image/spacer.gif" alt="" width="16" height="1"></td>
+	<td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="12">
+			<img src="/image/cap_content_white_main_top_left.gif" alt="" width="12" height="11"></td>
+		    <td bgcolor="#FFFFFF"><img src="/image/spacer_10_x_10.gif" width="10" alt="" height="10"></td>
+			<td width="12"><img src="/image/cap_content_white_main_top_right.gif" width="12" alt="" 
+
+height="11"></td>
+		  </tr>
+		</table>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td width="10" bgcolor="#FFFFFF">
+			<img src="/image/spacer_10_x_10.gif" alt="" width="10" height="10"></td>
+			<td bgcolor="#FFFFFF">
+				<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				  <tr valign="top">
+					<td valign="top">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					  <tr>
+					    <td>{% block navigator %}{% endblock %}</td>
+					  </tr>
+					  <tr>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr>
+					    <td align="center">
+						{% block content %}
+						{% endblock %}
+						</td>
+					  </tr>
+					</table>
+					</td>
+				  </tr>
+				</table>
+				
+			</td>
+		    <td width="10" bgcolor="#FFFFFF">
+			<img src="/image/spacer_10_x_10.gif" alt="" width="10" height="10"></td>
+		  </tr>
+		</table>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="12">
+			<img src="/image/cap_content_white_main_bottom_left.gif" alt="" width="12" height="11"></td>
+		    <td bgcolor="#FFFFFF">
+			<img src="/image/spacer_10_x_10.gif" alt="" width="10" height="10"></td>
+			<td width="12">
+			<img src="/image/cap_content_white_main_bottom_right.gif" alt="" width="12" height="11"></td>
+		  </tr>
+		</table>
+		
+		<td width="10" style="background:url('/image/contentframerightbackground.png') repeat-y;">
+<img src="/image/spacer.gif" alt="" width="16" height="1"></td>
+
+	</td>
+  </tr>
+  <tr>
+	<td><img src="/image/contentframebottomleft.png" height="23" alt="" width="16"></td>
+	<td background="/image/contentframebottombackground.png"><img src="/image/spacer.gif" alt="" height="23" 
+
+width="540"></td>
+	<td><img src="/image/contentframebottomright.png" alt="" height="23" width="16"></td>
+	</tr>
+</table>
+</body>
+</html>
