@@ -218,6 +218,13 @@ def skinSubThree(oldHtmlList,html,title,link):
     news, number = re.subn('<[^>]*>','', news)#字符串替换
     news=news.replace('[()][()]','[()]')
     news=news.replace('[()][()]','[()]')
+    news=news.replace('&nbsp;','')
+    news=news.replace('\t','')
+    news=news.replace('[()]','[()]\t')
+    if news[0:4]=='[()]':
+        news=news[4:]
+    else:
+        news='\t'+news
 
     if len(realContent)>0:
         start=html.find(title)
